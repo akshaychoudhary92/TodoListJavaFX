@@ -1,5 +1,9 @@
 package sample;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TextArea;
 import sample.datamodel.TodoItem;
 
 import java.time.LocalDate;
@@ -9,6 +13,11 @@ import java.util.List;
 
 public class Controller {
     private List<TodoItem> todoItems;
+
+    @FXML
+    private ListView<TodoItem> todoListView;
+    @FXML
+    private TextArea itemDetailsTextArea;
 
     public void initialize(){
         TodoItem item1 = new TodoItem("item1", "details1", LocalDate.of(2021, Month.DECEMBER, 25));
@@ -25,6 +34,17 @@ public class Controller {
         todoItems.add(item4);
         todoItems.add(item5);
         todoItems.add(item6);
+
+        todoListView.getItems().setAll(todoItems);
+        todoListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+
+    }
+
+    @FXML
+    public void handleClickListView(){
+        TodoItem item =  todoListView.getSelectionModel().getSelectedItem();
+//        System.out.println("The selected item is " + item);
+        itemDetailsTextArea.setText(item.getDetails());
 
     }
 }

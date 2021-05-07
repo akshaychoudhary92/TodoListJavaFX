@@ -1,6 +1,7 @@
 package sample.datamodel;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class TodoItem {
     private String shortDescription;
@@ -35,5 +36,26 @@ public class TodoItem {
 
     public void setDeadLine(LocalDate deadLine) {
         this.deadLine = deadLine;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TodoItem todoItem = (TodoItem) o;
+        return Objects.equals(shortDescription, todoItem.shortDescription) &&
+                Objects.equals(details, todoItem.details) &&
+                Objects.equals(deadLine, todoItem.deadLine);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(shortDescription, details, deadLine);
+    }
+
+    @Override
+    public String toString() {
+        return
+                 shortDescription;
     }
 }
